@@ -6,6 +6,8 @@ package com.lxq.blog.exception;
  * @createTime 2020年5月7日00点55分
  * @version 1.0
  */
-public class MyException {
+public class MyException extends Exception{
+
+
 
 }
