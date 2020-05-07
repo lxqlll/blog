@@ -1,6 +1,8 @@
 package com.lxq.blog.module.service;
 
 
+import com.lxq.blog.module.pojo.Admin;
+
 /**
  * <p>
  * 管理员表服务层接口
@@ -11,5 +13,10 @@ package com.lxq.blog.module.service;
  * @Version 1.0
  */
 public interface AdminService {
-
+    /**
+     *
+     * @param userName
+     * @return
+     */
+    Admin selectOne(String userName);
 }

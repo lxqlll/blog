@@ -1,5 +1,6 @@
 package com.lxq.blog.module.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
  * @Version 1.0
  */
 @Data
+@TableName(value = "bl_admin")
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 169915810554522554L;

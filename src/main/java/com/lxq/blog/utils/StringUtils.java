@@ -2,7 +2,6 @@ package com.lxq.blog.utils;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.util.Assert;
-
 import javax.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
 import java.io.StringWriter;
