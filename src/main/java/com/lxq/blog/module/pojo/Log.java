@@ -1,5 +1,6 @@
 package com.lxq.blog.module.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.lxq.blog.excel.annotation.Excel;
 import lombok.Data;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
  * @Version 1.0
  */
 @Data
+@TableName(value = "bl_log")
 public class Log implements Serializable {
 
     private static final long serialVersionUID = 762815810554536396L;

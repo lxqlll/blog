@@ -5,7 +5,7 @@ import com.lxq.blog.enums.ResultEnum;
 /**
  * @remark 自定义异常
  * @author lxq
- * @createTime 2020年5月7日11:49:37
+ * @createTime 2020年5月7日14:59:40
  * @version 1.0
  */
 public class MyException extends Exception{
