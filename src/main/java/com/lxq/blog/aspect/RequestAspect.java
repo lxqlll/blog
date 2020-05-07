@@ -1,20 +1,29 @@
 package com.lxq.blog.aspect;
 
-
+import com.alibaba.fastjson.JSON;
 import com.lxq.blog.enums.StateEnums;
+import com.lxq.blog.module.pojo.Log;
+import com.lxq.blog.module.service.LogService;
+import com.lxq.blog.utils.StringUtils;
+import com.lxq.blog.utils.ThreadLocalContext;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
+
 /**
- * @describe 切面输出基本信息以及记录日志
- * @author: lxq
- * @date: 2020年5月7日13:20:53
+ * 切面输出基本信息
+ * 以及记录日志
+ *
+ * @author: 杨德石
+ * @date: 2019/8/5 13:22
  * @Version 1.0
  */
 @Aspect
@@ -28,7 +37,7 @@ public class RequestAspect {
     /**
      * 两个..代表所有子目录，最后括号里的两个..代表所有参数
      */
-    @Pointcut("execution( * com.jg.*.controller..*(..))")
+    @Pointcut("execution( * com.lxq.*.module.controller..*(..))")
     public void logPointCut() {
     }
 

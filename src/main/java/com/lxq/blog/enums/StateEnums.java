@@ -26,7 +26,13 @@ public enum StateEnums {
      * 性别状态
      */
     SEX_MAN(1,"男"),
-    SEX_WOMAN(2,"女")
+    SEX_WOMAN(2,"女"),
+
+    /**
+     * 请求状态
+     */
+    REQUEST_SUCCESS(200,"请求成功"),
+    REQUEST_ERROR(400,"请求错误")
     ;
     private Integer code;
     private String msg;
