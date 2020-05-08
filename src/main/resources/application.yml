@@ -1,1 +1,25 @@
+#server配置
+server:
+  port: 8088 #配置servlet端口
+  servlet:
+    context-path: /blog #配置路径
+  tomcat:
+    uri-encoding: utf-8  #配置tomcat编码
+
+#spring配置
+spring:
+  profiles:
+    active: dev #环境 dev|test|pro
+
+
+#mybatis-plus的配置
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*/*.xml  #mapper文件的位置
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #打印sql语句
+
+
+
+
+
 
