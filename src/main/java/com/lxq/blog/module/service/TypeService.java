@@ -23,4 +23,6 @@ public interface TypeService {
     public void updateById(Type type);
     public boolean deleteById(Integer id);
     public Type queryById(Integer id);
+    public int updateTypeStart(Integer id);
+    public int updateTypeBlock(Integer id);
 }

@@ -49,8 +49,9 @@ public class TypeController {
         }else {
             return new Result(ResultEnum.ERROR.getCode(),"删除失败");
         }
-
     }
+
+
 
 
 }

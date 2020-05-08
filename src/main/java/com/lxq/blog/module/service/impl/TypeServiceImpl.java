@@ -91,11 +91,45 @@ public class TypeServiceImpl implements TypeService {
             typeMapper.updateById(type);
             return true;
         }
-
     }
 
     @Override
     public Type queryById(Integer id) {
-        return  typeMapper.selectById(id);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("type_id",id);
+        queryWrapper.eq("deleted",0);
+        return  typeMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public int updateTypeStart(Integer id) {
+        int result = 0;
+
+        Type type = queryById(id);
+
+        if(null==type){
+
+        }else{
+            type.setEnable(0);
+            typeMapper.updateById(type);
+            result = 1;
+        }
+        return result;
+    }
+
+    @Override
+    public int updateTypeBlock(Integer id) {
+        int result = 0;
+
+        Type type = queryById(id);
+
+        if(null==type){
+
+        }else{
+            type.setEnable(1);
+            typeMapper.updateById(type);
+            result = 1;
+        }
+        return result;
     }
 }
