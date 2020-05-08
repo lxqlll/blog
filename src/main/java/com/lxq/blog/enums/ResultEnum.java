@@ -17,7 +17,8 @@ public enum ResultEnum {
     ERROR(400,"操作失败"),
     DATA_NOT_FOUND(401,"查询失败"),
     PARAMS_NULL(402,"参数不能为空"),
-    NOT_LOGIN(403,"当前账号未登录")
+    NOT_LOGIN(403,"当前账号未登录"),
+    DELETE_ERROR(404,"删除失败"),
     ;
 
     private Integer code;

@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         //获取token
         String token = request.getHeader("Authorization");
 
-        if(StringUtils.isBlank(token)){
+        if(!StringUtils.isBlank(token)){
             Admin admin = (Admin) ShiroUtils.getLoginUser();
             if (admin!=null){
                 return  true;
