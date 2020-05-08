@@ -34,7 +34,8 @@ public class TypeServiceImpl implements TypeService {
         boolean falg = false;
         Type t = queryTypeByName(type.getTypeName());
         if(null != t){
-            if(typeMapper.update(type,null)>0){
+            QueryWrapper queryWrapper =  new QueryWrapper<>().eq("type_name",type.getTypeName());
+            if(typeMapper.update(type,queryWrapper)>0){
                 falg = true;
             }else {
                 falg = false;
