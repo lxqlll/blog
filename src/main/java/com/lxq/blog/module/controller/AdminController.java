@@ -1,7 +1,9 @@
 package com.lxq.blog.module.controller;
 
 import com.lxq.blog.enums.ResultEnum;
+import com.lxq.blog.exception.MyException;
 import com.lxq.blog.module.pojo.Admin;
+import com.lxq.blog.module.service.AdminService;
 import com.lxq.blog.utils.Result;
 import com.lxq.blog.utils.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -9,6 +11,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -23,11 +26,16 @@ import java.util.Map;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
+    /**
+     * 声明AdminService
+     */
+    @Autowired
+    private AdminService adminService;
 
     /**
      * 登录
-     * @param admin
-     * @return
+     * @param admin 管理员实体
+     * @return Result 统一返回类型
      */
     @PostMapping("/login")
     public Result login(@RequestBody Admin admin){
@@ -55,5 +63,31 @@ public class AdminController {
         resultMap.put("token",serializable);
         return new Result(resultMap);
     }
+
+    /**
+     * 查询管理员信息
+     * @return Result 统一返回类型
+     */
+    @GetMapping(value = "/getAdmin/{id}")
+    public Result getAdmin(@PathVariable Integer id){
+        return new Result(adminService.getAdmin(id));
+    }
+
+    /**
+     * 修改个人信息
+     * @param admin 管理员实体
+     * @return Result 统一返回类型
+     */
+    @PostMapping(value = "/updateAdmin")
+    public Result updateAdmin(@RequestBody Admin admin){
+        if(null==admin)return new Result(ResultEnum.PARAMS_NULL);   //判断有无数据
+        try {
+            adminService.updateAdminById(admin);//调用修改方法
+        } catch (MyException myException) {
+            myException.printStackTrace();
+        }
+        return new Result(ResultEnum.SUCCESS);
+    }
+
 
 }
