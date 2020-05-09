@@ -2,7 +2,11 @@ package com.lxq.blog.module.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lxq.blog.module.pojo.Blog;
+import com.lxq.blog.utils.Page;
+import com.lxq.blog.vo.BlogVo;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +21,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface BlogMapper extends BaseMapper<Blog> {
 
+    public List<BlogVo> getByPage(Page<BlogVo> page);
+
+    public Integer getCountByPage(Page<BlogVo> page);
 }

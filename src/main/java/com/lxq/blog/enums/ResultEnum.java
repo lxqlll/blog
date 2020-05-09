@@ -19,6 +19,7 @@ public enum ResultEnum {
     PARAMS_NULL(402,"参数不能为空"),
     NOT_LOGIN(403,"当前账号未登录"),
     DELETE_ERROR(404,"删除失败"),
+    PARAMS_ERROR(405,"排序参数不合法")
     ;
 
     private Integer code;

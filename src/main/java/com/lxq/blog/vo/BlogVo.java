@@ -1,27 +1,12 @@
-package com.lxq.blog.module.pojo;
+package com.lxq.blog.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.lxq.blog.module.pojo.Type;
 import lombok.Data;
 
-import java.io.Serializable;
-
-/**
- * <p>
- * 博客表实体类
- * </p>
- *
- * @author lxq
- * @date 2020-02-07 14:04:12
- * @Version 1.0
- *
- */
 @Data
-@TableName(value = "bl_blog")
-public class Blog implements Serializable {
-
-    private static final long serialVersionUID = -559415810554538278L;
+public class BlogVo {
 
     /**
      * 帖子id
@@ -62,7 +47,7 @@ public class Blog implements Serializable {
     /**
      * 博客分类
      */
-    private Integer blogType;
+    private Type type;
 
     /**
      * 简介
@@ -98,5 +83,9 @@ public class Blog implements Serializable {
      * 是否删除，0否1是
      */
     private Integer deleted;
+    /**
+     * 类型名称
+     */
+    private String typeName;
 
 }
