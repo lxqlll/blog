@@ -28,7 +28,7 @@
     </sql>
 
 
-    <select id="getByPage" parameterType="com.jg.blog.utils.Page" resultMap="BaseResultMap">
+    <select id="getByPage"  resultMap="BaseResultMap">
         select
             about_id,
             about_title,
@@ -47,7 +47,7 @@
         limit #{index}, #{pageSize}
     </select>
 
-    <select id="getCountByPage" parameterType="com.jg.blog.utils.Page" resultType="java.lang.Integer">
+    <select id="getCountByPage"  resultType="java.lang.Integer">
         select
         count(*)
         from bl_about
