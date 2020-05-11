@@ -2,6 +2,7 @@ package com.lxq.blog.module.service;
 
 import com.lxq.blog.exception.MyException;
 import com.lxq.blog.module.pojo.About;
+import com.lxq.blog.utils.Page;
 
 /**
  * <p>
@@ -57,4 +58,13 @@ public interface AboutService {
      * @return
      */
     int updateOne(Integer id,Integer state);
+
+    /**
+     * 分页查询
+     * @param page  分页对象
+     * @return Page 分页对象
+     */
+    Page<About> getByPage(Page page);
+
+
 }

@@ -4,9 +4,14 @@ import com.lxq.blog.enums.ResultEnum;
 import com.lxq.blog.exception.MyException;
 import com.lxq.blog.module.pojo.About;
 import com.lxq.blog.module.service.AboutService;
+import com.lxq.blog.utils.Page;
 import com.lxq.blog.utils.Result;
+import com.lxq.blog.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @remark 闲言控制器
@@ -60,7 +65,7 @@ public class AboutController {
     }
 
     /**
-     * 阅读
+     * 根据编号阅读
      * @param id 编号
      * @return Result 统一返回类型
      */
@@ -72,7 +77,7 @@ public class AboutController {
     }
 
     /**
-     * 启用方法
+     * 根据编号启用方法
      * @param id 编号
      * @return Result 统一返回类型
      */
@@ -84,7 +89,7 @@ public class AboutController {
     }
 
     /**
-     * 禁用方法
+     * 根据编号禁用方法
      * @param id 编号
      * @return Result 统一返回类型
      */
@@ -96,6 +101,24 @@ public class AboutController {
     }
 
 
-
+    @PostMapping("/getByPage")
+    public Result getByPage(Page page){
+        if(page==null)return new Result(ResultEnum.PARAMS_NULL);
+        String sortColumn =  page.getSortColumn();//获取排序列
+        if(StringUtils.isNotBlank(sortColumn)){ //判断是否为空
+            String [] sortColumns = {"blog_goods", "blog_read", "blog_collection",
+                    "type_name", "blog_comment", "created_time", "update_time"};    //创建数组
+            List<String> sortList= Arrays.asList(sortColumns); //将数组转化为集合
+            /**
+             * contains方法是否包含字符
+             * toLowerCase转化为小写
+             */
+            if (!sortList.contains(sortColumn.toLowerCase())){
+                return new Result<>(ResultEnum.PARAMS_ERROR.getCode(), "排序参数不合法！");
+            }
+        }
+        page = aboutService.getByPage(page);
+        return new Result(page);
+    }
 
 }

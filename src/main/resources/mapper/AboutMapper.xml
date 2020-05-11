@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lxq.blog.module.mapper.AboutMapper">
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.jg.blog.pojo.About">
+    <resultMap id="BaseResultMap" type="com.lxq.blog.module.pojo.About">
         <id column="about_id" property="aboutId"/>
         <result column="about_title" property="aboutTitle"/>
         <result column="about_content" property="aboutContent"/>
@@ -26,65 +26,8 @@
         enable,
         deleted
     </sql>
-    <insert id="save" parameterType="com.jg.blog.pojo.About">
-        insert into bl_about(about_title, about_content) values(
-            #{aboutTitle}, #{aboutContent}
-        )
-    </insert>
-    <update id="updateById" parameterType="com.jg.blog.pojo.About">
-        update bl_about set
-        version = version + 1
-        <if test="aboutTitle!=null and aboutTitle!=''">
-            ,about_title = #{aboutTitle}
-        </if>
-        <if test="aboutContent!=null and aboutContent!=''">
-            ,about_content = #{aboutContent}
-        </if>
-        <if test="aboutRead!=null">
-            ,about_read = #{aboutRead}
-        </if>
-        where about_id = #{aboutId}
-        and version = #{version}
-    </update>
-    <update id="deleteById">
-        update bl_about set
-        deleted = 1
-        where about_id = #{id}
-    </update>
-    <update id="updateEnable" parameterType="com.jg.blog.pojo.About">
-        update bl_about set
-        version = version + 1,
-        enable = #{enable}
-        where about_id = #{aboutId}
-        and version = #{version}
-    </update>
-    <select id="getById" resultMap="BaseResultMap">
-        select
-            about_id,
-            about_title,
-            about_content,
-            about_read,
-            created_time,
-            update_time,
-            version
-        from bl_about
-        where about_id = #{aboutId}
-        and deleted = 0
-    </select>
-    <select id="getAbout" resultMap="BaseResultMap">
-        select
-            about_id,
-            about_title,
-            about_content,
-            about_read,
-            created_time,
-            update_time,
-            version
-        from bl_about
-        where enable = 1
-        and deleted = 0
-        limit 1
-    </select>
+
+
     <select id="getByPage" parameterType="com.jg.blog.utils.Page" resultMap="BaseResultMap">
         select
             about_id,
@@ -103,6 +46,7 @@
         </if>
         limit #{index}, #{pageSize}
     </select>
+
     <select id="getCountByPage" parameterType="com.jg.blog.utils.Page" resultType="java.lang.Integer">
         select
         count(*)
@@ -112,5 +56,7 @@
             and about_title like CONCAT('%', #{params.aboutTitle}, '%')
         </if>
     </select>
+
+
 
 </mapper>

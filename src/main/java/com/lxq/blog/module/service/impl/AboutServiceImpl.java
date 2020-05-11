@@ -6,10 +6,13 @@ import com.lxq.blog.exception.MyException;
 import com.lxq.blog.module.mapper.AboutMapper;
 import com.lxq.blog.module.pojo.About;
 import com.lxq.blog.module.service.AboutService;
+import com.lxq.blog.utils.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>
@@ -31,8 +34,9 @@ public class AboutServiceImpl implements AboutService {
     private AboutMapper aboutMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void saveOrUpdate(About about) throws MyException {
-        About a = getAboutById(about.getAboutId()); //调用根据编号查询方法
+        About a = this.getAboutById(about.getAboutId()); //调用根据编号查询方法
         if(null==a){ //判断有无数据
             try {
                 aboutMapper.insert(about);
@@ -65,7 +69,7 @@ public class AboutServiceImpl implements AboutService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public About readingAbout(Integer id) {
-        About about = getAboutById(id);//调用查询编号的方法
+        About about = this.getAboutById(id);//调用查询编号的方法
         about.setAboutRead(about.getAboutRead()+1); //修改阅读数
         about.setAboutRead(about.getAboutRead()+1); //修改阅读数
         try {
@@ -79,7 +83,7 @@ public class AboutServiceImpl implements AboutService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteAbout(Integer id) {
-        About about = getAboutById(id);
+        About about = this.getAboutById(id);
         About a = new About();
         a.setDeleted(1);
         a.setAboutId(about.getAboutId());
@@ -104,7 +108,7 @@ public class AboutServiceImpl implements AboutService {
     @Override
     public int updateOne(Integer id,Integer state){
         int result = 0;
-        About about = getAboutById(id);
+        About about = this.getAboutById(id);
         About a = new About();
         a.setEnable(state);
         a.setAboutId(about.getAboutId());
@@ -115,5 +119,19 @@ public class AboutServiceImpl implements AboutService {
         }
         return result;
     }
+
+    @Override
+    public Page<About> getByPage(Page page) {
+        //查询所有数据
+        List<About> blogVoList = aboutMapper.getByPage(page);
+        //将数据放入page的集合中
+        page.setList(blogVoList);
+        //查询数据记录
+        int count = aboutMapper.getCountByPage(page);
+        //将数据放入page中
+        page.setTotalCount(count);
+        return page;
+    }
+
 
 }
