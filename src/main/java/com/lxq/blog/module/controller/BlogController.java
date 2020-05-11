@@ -6,6 +6,7 @@ import com.lxq.blog.module.service.BlogService;
 import com.lxq.blog.utils.Page;
 import com.lxq.blog.utils.Result;
 import com.lxq.blog.utils.StringUtils;
+import com.lxq.blog.vo.BlogVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,7 +46,7 @@ public class BlogController {
      * @return Result 统一返回类型
      */
     @GetMapping("/getBlogById/{blogId}")
-    public Result getBlogById(String blogId){
+    public Result getBlogById(@PathVariable String blogId){
         if(blogId==null)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
         return new Result(blogService.findBlogById(blogId));
     }
@@ -58,8 +59,8 @@ public class BlogController {
     @GetMapping("read/{id}")
     public Result read(@PathVariable String id){
         if(id==null)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
-        blogService.readById(id);   //调用方法
-        return new Result(ResultEnum.SUCCESS);
+        BlogVo blogVo = blogService.readById(id);   //调用方法
+        return new Result(blogVo);
     }
 
     /**

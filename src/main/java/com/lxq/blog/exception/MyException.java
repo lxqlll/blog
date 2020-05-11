@@ -32,7 +32,7 @@ public class MyException extends Exception{
     public MyException(String msg) {
         super(msg);
     }
-
+Z
     public MyException(Throwable throwable) {
         super(throwable);
     }

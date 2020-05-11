@@ -1,6 +1,5 @@
 package com.lxq.blog.module.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -26,7 +25,7 @@ public class Blog implements Serializable {
     /**
      * 帖子id
      */
-    @TableId(value = "blog_id",type = IdType.AUTO)
+    @TableId(value = "blog_id")
     private String blogId;
 
     /**
