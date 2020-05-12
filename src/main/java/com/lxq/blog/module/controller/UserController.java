@@ -75,8 +75,8 @@ public class UserController {
      * @param page 分页对象
      * @return Result 统一返回类型
      */
-    @PostMapping("/selectPage")
-    public Result page(@RequestBody Page page){
+    @PostMapping("/selectPage1")
+    public Result page1(@RequestBody Page page){
         String sortColumn =  page.getSortColumn();//获取排序列
         if(StringUtils.isNotBlank(sortColumn)){ //判断是否为空
             String[] sortColumns = {"artist", "created_time", "enabled"};   //创建数组
@@ -92,7 +92,4 @@ public class UserController {
         page = userService.selectPage(page);
         return new Result(page);
     }
-
-
-
 }
