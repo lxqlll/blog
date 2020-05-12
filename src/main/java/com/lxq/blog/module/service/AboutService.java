@@ -51,13 +51,6 @@ public interface AboutService {
      */
     void disable(Integer id);
 
-    /**
-     *
-     * @param id
-     * @param state
-     * @return
-     */
-    int updateOne(Integer id,Integer state);
 
     /**
      * 分页查询

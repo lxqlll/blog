@@ -9,7 +9,6 @@ import com.lxq.blog.utils.Result;
 import com.lxq.blog.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -72,8 +71,8 @@ public class AboutController {
     @GetMapping("/reading/{id}")
     public Result reading(@PathVariable Integer id){
         if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
-        aboutService.readingAbout(id); //调用阅读方法
-        return new Result(ResultEnum.SUCCESS);
+        About about = aboutService.readingAbout(id);//调用阅读方法
+        return new Result(about);
     }
 
     /**
@@ -106,8 +105,7 @@ public class AboutController {
         if(page==null)return new Result(ResultEnum.PARAMS_NULL);
         String sortColumn =  page.getSortColumn();//获取排序列
         if(StringUtils.isNotBlank(sortColumn)){ //判断是否为空
-            String [] sortColumns = {"blog_goods", "blog_read", "blog_collection",
-                    "type_name", "blog_comment", "created_time", "update_time"};    //创建数组
+            String [] sortColumns = { "about_read", "created_time", "update_time"};    //创建数组
             List<String> sortList= Arrays.asList(sortColumns); //将数组转化为集合
             /**
              * contains方法是否包含字符
