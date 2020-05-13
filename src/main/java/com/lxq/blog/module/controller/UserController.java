@@ -8,6 +8,7 @@ import com.lxq.blog.utils.Result;
 import com.lxq.blog.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,7 +62,8 @@ public class UserController {
      */
     @DeleteMapping(value = "/deleteById/{id}")
     public Result<User> deleteById(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
+        //判断参数是否为空
+        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
         if (userService.deleteById(id)) { //删除方法
             return new Result(ResultEnum.SUCCESS.getCode(),"删除成功");
         }else {
@@ -75,12 +77,16 @@ public class UserController {
      * @param page 分页对象
      * @return Result 统一返回类型
      */
-    @PostMapping("/selectPage1")
-    public Result page1(@RequestBody Page page){
-        String sortColumn =  page.getSortColumn();//获取排序列
-        if(StringUtils.isNotBlank(sortColumn)){ //判断是否为空
-            String[] sortColumns = {"artist", "created_time", "enabled"};   //创建数组
-            List<String> sortList= Arrays.asList(sortColumns); //将数组转化为集合
+    @PostMapping("/selectByPage")
+    public Result selectByPage(@RequestBody Page page){
+        //获取排序列
+        String sortColumn =  page.getSortColumn();
+        //判断是否为空
+        if(StringUtils.isNotBlank(sortColumn)){
+            //创建数组
+            String[] sortColumns = {"artist", "created_time", "enabled"};
+            //将数组转化为集合
+            List<String> sortList= Arrays.asList(sortColumns);
             /**
              * contains方法是否包含字符
              * toLowerCase转化为小写

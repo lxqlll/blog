@@ -26,7 +26,8 @@ public class ShiroUtils {
      */
     public static Object getLoginUser() {
         Session session = SecurityUtils.getSubject().getSession();
-        SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+        SimplePrincipalCollection principalCollection =
+                (SimplePrincipalCollection) session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
         if (principalCollection == null) {
             return null;
         }

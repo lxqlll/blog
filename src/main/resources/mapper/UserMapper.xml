@@ -24,7 +24,7 @@
 
 
 
-    <select id="getByPage" resultMap="BaseResultMap">
+    <select id="getByPage" parameterType="com.lxq.blog.utils.Page" resultMap="BaseResultMap">
         select
         user_id, username, name, sex, header, nickname, user_email, created_time, update_time
         from bl_user
@@ -52,7 +52,7 @@
     </select>
 
 
-    <select id="getCountByPage" resultType="java.lang.Integer">
+    <select id="getCountByPage"  parameterType="com.lxq.blog.utils.Page" resultType="java.lang.Integer">
         select
         count(*)
         from bl_user

@@ -5,6 +5,7 @@ import com.lxq.blog.exception.MyException;
 import com.lxq.blog.module.pojo.Admin;
 import com.lxq.blog.module.service.AdminService;
 import com.lxq.blog.utils.Result;
+import com.lxq.blog.utils.ShiroUtils;
 import com.lxq.blog.utils.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -68,9 +69,11 @@ public class AdminController {
      * 查询管理员信息
      * @return Result 统一返回类型
      */
-    @GetMapping(value = "/getAdmin/{id}")
-    public Result getAdmin(@PathVariable Integer id){
-        return new Result(adminService.getAdmin(id));
+    @GetMapping(value = "/getAdmin")
+    public Result getAdmin(){
+        Admin admin = (Admin) ShiroUtils.getLoginUser();
+        admin.setPassword("");
+        return new Result(admin);
     }
 
     /**
@@ -80,9 +83,11 @@ public class AdminController {
      */
     @PostMapping(value = "/updateAdmin")
     public Result updateAdmin(@RequestBody Admin admin){
-        if(null==admin)return new Result(ResultEnum.PARAMS_NULL);   //判断有无数据
+        //判断有无数据
+        if(null==admin)return new Result(ResultEnum.PARAMS_NULL);
         try {
-            adminService.updateAdminById(admin);//调用修改方法
+            //调用修改方法
+            adminService.updateAdminById(admin);
         } catch (MyException myException) {
             myException.printStackTrace();
         }

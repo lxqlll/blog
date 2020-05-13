@@ -1,8 +1,8 @@
 #server配置
 server:
   port: 8088 #配置servlet端口
-  servlet:
-    context-path: /blog #配置路径
+    #servlet:
+  #context-path: /blog #配置路径
   tomcat:
     uri-encoding: utf-8  #配置tomcat编码
 
