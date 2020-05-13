@@ -13,12 +13,13 @@ public enum ResultEnum {
     /**
      * 返回结果枚举，每一个枚举代表一个返回状态
      */
-    SUCCESS(200,"操作成功"),
+    SUCCESS(20000,"操作成功"),
     ERROR(400,"操作失败"),
     DATA_NOT_FOUND(401,"查询失败"),
     PARAMS_NULL(402,"参数不能为空"),
     NOT_LOGIN(403,"当前账号未登录"),
     DELETE_ERROR(404,"删除失败"),
+    PARAMS_ERROR(405,"排序参数不合法")
     ;
 
     private Integer code;

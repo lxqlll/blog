@@ -44,7 +44,7 @@ public class ShiroConfig {
          *  perms：该资源必须得到权限才可以访问
          *  role：该资源必须得到角色权限才可以访问
          */
-        Map<String, String> filterMap = Maps.newHashMap();
+        Map<String, String> filterMap = Maps.newLinkedHashMap();
         filterMap.put("/*/login", "anon");
         filterMap.put("/**", "authc");
 

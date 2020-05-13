@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxq.blog.module.mapper.LogMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="Log">
+        <id column="log_id" property="logId"/>
+        <result column="log_url" property="logUrl"/>
+        <result column="log_params" property="logParams"/>
+        <result column="log_status" property="logStatus"/>
+        <result column="log_message" property="logMessage"/>
+        <result column="log_method" property="logMethod"/>
+        <result column="log_time" property="logTime"/>
+        <result column="log_result" property="logResult"/>
+        <result column="log_ip" property="logIp"/>
+        <result column="created_time" property="createdTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        log_id, log_url, log_params, log_status, log_message, log_method, log_time, log_result, log_ip, created_time
+    </sql>
+
+    <select id="getByPage"  resultMap="BaseResultMap">
+        select
+        log_id, log_url, log_params, log_status, log_message,
+        log_method, log_time, log_result, log_ip, created_time
+        from bl_log
+        <where>
+            <if test="params.logUrl!=null and params.logUrl!=''">
+                and log_url = #{params.logUrl}
+            </if>
+            <if test="params.logStatus!=null">
+                and log_status = #{params.logStatus}
+            </if>
+            <if test="params.logMethod!=null and params.logMethod!=''">
+                and log_method = #{params.logMethod}
+            </if>
+            <if test="params.logIp!=null and params.logIp!=''">
+                and log_ip = #{params.logIp}
+            </if>
+        </where>
+        <if test="sortColumn!=null and sortColumn!=''">
+            order by ${sortColumn} ${sortMethod}
+        </if>
+        limit #{index}, #{pageSize}
+    </select>
+
+    <select id="getCountByPage" resultType="java.lang.Integer">
+        select
+        count(*)
+        from bl_log
+        <where>
+            <if test="params.logUrl!=null and params.logUrl!=''">
+                and log_url = #{params.logUrl}
+            </if>
+            <if test="params.logStatus!=null">
+                and log_status = #{params.logStatus}
+            </if>
+            <if test="params.logMethod!=null and params.logMethod!=''">
+                and log_method = #{params.logMethod}
+            </if>
+            <if test="params.logIp!=null and params.logIp!=''">
+                and log_ip = #{params.logIp}
+            </if>
+        </where>
+    </select>
+
+</mapper>

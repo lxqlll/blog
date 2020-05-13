@@ -1,5 +1,7 @@
 package com.lxq.blog.module.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.lxq.blog.excel.annotation.Excel;
 import lombok.Data;
@@ -24,6 +26,7 @@ public class Log implements Serializable {
      * 日志id
      */
     @Excel(name = "编号")
+    @TableId(value = "log_id",type = IdType.AUTO)
     private Integer logId;
 
     /**

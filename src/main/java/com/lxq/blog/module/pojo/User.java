@@ -1,7 +1,9 @@
 package com.lxq.blog.module.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-
 import java.io.Serializable;
 
 /**
@@ -14,6 +16,7 @@ import java.io.Serializable;
  * @Version 1.0
  */
 @Data
+@TableName(value = "bl_user")
 public class User implements Serializable {
 
     private static final long serialVersionUID = -131715810554534737L;
@@ -21,6 +24,7 @@ public class User implements Serializable {
     /**
      * 用户id
      */
+    @TableId(type = IdType.AUTO)
     private Integer userId;
 
     /**

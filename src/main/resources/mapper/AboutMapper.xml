@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lxq.blog.module.mapper.AboutMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.lxq.blog.module.pojo.About">
+        <id column="about_id" property="aboutId"/>
+        <result column="about_title" property="aboutTitle"/>
+        <result column="about_content" property="aboutContent"/>
+        <result column="about_read" property="aboutRead"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="version" property="version"/>
+        <result column="enable" property="enable"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        about_id,
+        about_title,
+        about_content,
+        about_read,
+        created_time,
+        update_time,
+        version,
+        enable,
+        deleted
+    </sql>
+
+
+    <select id="getByPage"  resultMap="BaseResultMap">
+        select
+            about_id,
+            about_title,
+            about_read,
+            created_time,
+            update_time,
+            enable
+        from bl_about
+        where  deleted = 0
+        <if test="params.aboutTitle!=null and params.aboutTitle!=''">
+            and about_title like CONCAT('%', #{params.aboutTitle}, '%')
+        </if>
+        <if test="sortColumn!=null and sortColumn!=''">
+            order by ${sortColumn} ${sortMethod}
+        </if>
+        limit #{index}, #{pageSize}
+    </select>
+
+    <select id="getCountByPage"  resultType="java.lang.Integer">
+        select
+        count(*)
+        from bl_about
+        where  deleted = 0
+        <if test="params.aboutTitle!=null and params.aboutTitle!=''">
+            and about_title like CONCAT('%', #{params.aboutTitle}, '%')
+        </if>
+    </select>
+
+
+
+</mapper>

@@ -2,6 +2,9 @@ package com.lxq.blog.module.service;
 
 
 import com.lxq.blog.module.pojo.Log;
+import com.lxq.blog.utils.Page;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,4 +22,23 @@ public interface LogService {
      * @param log 接口访问日志表实体类
      */
     public void save(Log log);
+
+    /**
+     * 分页查询
+     * @param page 分页
+     * @return Log 日志
+     */
+    Page<Log> getByPage(Page page);
+
+    /**
+     * 删除方法
+     * @param id 编号
+     */
+    void delete(Integer id);
+
+    /**
+     * 批量删除
+     * @param ids 集合
+     */
+    void batchDelete(List<Integer> ids);
 }
