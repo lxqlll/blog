@@ -8,6 +8,7 @@ import com.lxq.blog.module.service.TypeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -34,11 +35,11 @@ public class TypeServiceImpl implements TypeService {
     public boolean saveOrUpdate(Type type) {
         boolean falg = false;
         //根据名称来查询帖子
-        Type t = queryTypeByName(type.getTypeName());
+        Type t = queryById(type.getTypeId());
         if(null != t){  //判断是否有数据
             //实例化创建QueryWrapper对象
             QueryWrapper queryWrapper =  new QueryWrapper<>()
-                    .eq("deleted",0);
+                    .eq("deleted",0).eq("type_id",type.getTypeId());
             if(typeMapper.update(type,queryWrapper)>0){ //执行修改方法
                 falg = true;
             }else {
@@ -91,6 +92,7 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean deleteById(Integer id) {
         Type t = queryById(id); //调用根据编号查询方法
         if(null==t){

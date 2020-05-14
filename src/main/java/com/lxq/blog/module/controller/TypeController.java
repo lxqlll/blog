@@ -29,8 +29,10 @@ public class TypeController {
      */
     @PostMapping(value = "/saveOrUpdate")
     public Result<Type> saveOrUpdate(@RequestBody Type type){
-        if(null==type && type.getTypeName().equals(""))return new Result<>(ResultEnum.PARAMS_NULL);//判断参数是否为空
-        if (typeService.saveOrUpdate(type)) {   //判断有无数据
+        //判断参数是否为空
+        if(null==type)return new Result<>(ResultEnum.PARAMS_NULL);
+        //判断有无数据
+        if (typeService.saveOrUpdate(type)) {
             return new Result(ResultEnum.SUCCESS);
         }else {
             return new Result(ResultEnum.ERROR);
@@ -42,7 +44,7 @@ public class TypeController {
      * @param id 编号
      * @return Result 统一返回类型
      */
-    @GetMapping(value = "/list/{id}")
+    @GetMapping(value = "/getTypeById/{id}")
     public Result<Type> getTypeById(@PathVariable Integer id){
         if(null==id)return new Result<>(ResultEnum.PARAMS_NULL);    //判断参数是否为空
         return new Result(typeService.queryById(id));
@@ -81,7 +83,33 @@ public class TypeController {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @PutMapping(value = "/stater/{id}")
+    public Result staterTypeById(@PathVariable Integer id){
+        Type type = new Type();
+        type.setTypeId(id);
+        type.setEnable(1);
+        typeService.updateById(type);
+        return new Result(ResultEnum.SUCCESS.getCode(),"启用成功");
+    }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @PutMapping(value = "/disabled/{id}")
+    public Result disabledTypeById(@PathVariable Integer id){
+        Type type = new Type();
+        type.setTypeId(id);
+        type.setEnable(0);
+        typeService.updateById(type);
+        return new Result(ResultEnum.SUCCESS.getCode(),"禁用成功");
+    }
 
 
 }
