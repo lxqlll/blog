@@ -6,11 +6,15 @@ server:
   tomcat:
     uri-encoding: utf-8  #配置tomcat编码
 
+
 #spring配置
 spring:
   profiles:
     active: dev #环境 dev|test|pro
-
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
 
 #mybatis-plus的配置
 mybatis-plus:
@@ -21,14 +25,14 @@ mybatis-plus:
 
 fdfs:
   so-timeout: 2500       # \u8BFB\u53D6\u65F6\u95F4
-  connect-timeout: 600   # \u8FDE\u63A5\u8D85\u65F6\u65F6\u95F4
+  connect-timeout: 1600   # 连接超时时间
   thumb-image:           # \u7F29\u7565\u56FE
     width: 100
     height: 100
-  tracker-list:          # tracker\u670D\u52A1\u914D\u7F6E\u5730\u5740\u5217\u8868
-    - 47.102.115.146:22122
+  tracker-list:        # tracker地址，多个可fdfs.trackerList[0]、fdfs.trackerList[1]等方式配置
+    - 106.53.102.135:22122
 upload:
-  base-url: http://47.102.115.146/
+  base-url: http://106.53.102.135/
   allow-types:
     - image/jpeg
     - image/png

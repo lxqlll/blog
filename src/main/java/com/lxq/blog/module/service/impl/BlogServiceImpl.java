@@ -50,17 +50,23 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public void saveOrUpdate(Blog blog) {
-        Blog b = findBlogById(blog.getBlogId()); //调用查询findBlogById方法
-        System.out.println(b.toString());
+        //调用查询findBlogById方法
+        Blog b = findBlogById(blog.getBlogId());
         if (null==b){
             blog.setBlogId(idWorker.nextId()+"");
-            blogMapper.insert(blog); //调用新增方法
+            //调用新增方法
+            blogMapper.insert(blog);
         }else {
-            blog.setVersion(blog.getVersion()+1); //乐观锁
-            QueryWrapper wrapper = new QueryWrapper();//实例化创建QueryWrapper对象
-            wrapper.eq("blog_id",b.getBlogId());   //修改条件
-            wrapper.eq("version",b.getVersion());  //修改条件
-            blogMapper.update(blog,wrapper); //调用通过id修改方法
+            //乐观锁
+            blog.setVersion(blog.getVersion()+1);
+            //实例化创建QueryWrapper对象
+            QueryWrapper wrapper = new QueryWrapper();
+            //修改条件
+            wrapper.eq("blog_id",b.getBlogId());
+            //修改条件
+            wrapper.eq("version",b.getVersion());
+            //调用通过id修改方法
+            blogMapper.update(blog,wrapper);
         }
     }
 

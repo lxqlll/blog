@@ -15,8 +15,8 @@ import java.io.IOException;
 
 /**
  * @program: fastdfs-demo
- * @author: 雷哥
- * @create: 2020-01-03 10:48
+ * @author: lxq
+ * @create: 2020年5月15日10:21:08
  **/
 @Component
 @EnableConfigurationProperties(UploadConfig.class)

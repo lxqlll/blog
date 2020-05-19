@@ -25,5 +25,4 @@ public class About implements Serializable {
     private Integer version;
     private Integer enable;
     private Integer deleted;
-
 }

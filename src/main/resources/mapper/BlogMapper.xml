@@ -77,6 +77,9 @@
         <if test="params.typeId!=null and params.typeId!=''">
             and type_id = #{params.typeId}
         </if>
+        <if test="params.typeId!=null and params.typeId!=''">
+            and type_id = #{params.typeId}
+        </if>
     </select>
 
 

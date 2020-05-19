@@ -81,10 +81,15 @@ public class BlogController {
      */
     @PostMapping("/pageBlog")
     public Result pageBlog(@RequestBody Page page){
-        String sortColumn =  page.getSortColumn();//获取排序列
-        if(StringUtils.isNotBlank(sortColumn)){ //判断是否为空
-            String [] sortColumns = { "blog_read", "created_time", "update_time"};    //创建数组
-            List<String>  sortList=Arrays.asList(sortColumns); //将数组转化为集合
+        //获取排序列
+        String sortColumn =  page.getSortColumn();
+        //判断是否为空
+        if(StringUtils.isNotBlank(sortColumn)){
+            //创建数组
+            String[] sortColumns = {"blog_goods", "blog_read", "blog_collection",
+                    "type_name", "blog_comment", "created_time", "update_time"};
+            //将数组转化为集合
+            List<String>  sortList=Arrays.asList(sortColumns);
             /**
              * contains方法是否包含字符
              * toLowerCase转化为小写
