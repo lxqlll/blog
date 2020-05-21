@@ -37,10 +37,10 @@ public class AboutServiceImpl implements AboutService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveOrUpdate(About about) throws MyException {
-        System.out.println("[null]==>"+about.getAboutId());
-        About a = this.getAboutById(about.getAboutId()); //调用根据编号查询方法
-        System.out.println(a);
-        if(null==a){ //判断有无数据
+        //调用根据编号查询方法
+        About a = aboutMapper.selectById(about.getAboutId());
+        //判断有无数据
+        if(null==a){
             try {
                 aboutMapper.insert(about);
             } catch (Exception e) {
@@ -59,6 +59,7 @@ public class AboutServiceImpl implements AboutService {
             }
         }
     }
+
 
     @Override
     public About getAboutById(Integer id) {
@@ -105,7 +106,7 @@ public class AboutServiceImpl implements AboutService {
     public void start(Integer id)  {
         About about = aboutMapper.selectById(id);
         if (null!=about) {
-            about.setEnable(0);
+            about.setEnable(1);
             aboutMapper.updateById(about);
         }
     }
@@ -115,7 +116,7 @@ public class AboutServiceImpl implements AboutService {
     public void disable(Integer id)  {
         About about = aboutMapper.selectById(id);
         if (null!=about) {
-            about.setEnable(1);
+            about.setEnable(0);
             aboutMapper.updateById(about);
         }
     }

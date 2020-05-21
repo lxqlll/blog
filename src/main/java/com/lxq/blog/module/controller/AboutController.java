@@ -118,5 +118,4 @@ public class AboutController {
         page = aboutService.getByPage(page);
         return new Result(page);
     }
-
 }

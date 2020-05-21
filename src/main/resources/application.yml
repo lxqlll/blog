@@ -30,9 +30,9 @@ fdfs:
     width: 100
     height: 100
   tracker-list:        # tracker地址，多个可fdfs.trackerList[0]、fdfs.trackerList[1]等方式配置
-    - 106.53.102.135:22122
+    - 111.230.202.74:22122
 upload:
-  base-url: http://106.53.102.135/
+  base-url: http://111.230.202.74/
   allow-types:
     - image/jpeg
     - image/png

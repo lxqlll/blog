@@ -32,4 +32,6 @@ public interface AboutMapper extends BaseMapper<About> {
      * @return Integer 整形
      */
     Integer getCountByPage(Page page);
+
+
 }
