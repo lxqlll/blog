@@ -14,6 +14,7 @@
         <result column="deleted" property="deleted"/>
     </resultMap>
 
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         about_id,
@@ -29,7 +30,7 @@
 
 
 
-    <select id="getByPage"  resultMap="BaseResultMap">
+    <select id="getByPage" parameterType="com.lxq.blog.utils.Page"  resultMap="BaseResultMap">
         select
             about_id,
             about_title,

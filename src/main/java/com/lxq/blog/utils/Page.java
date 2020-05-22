@@ -29,7 +29,7 @@ public class Page<T> implements Serializable {
     /**
      * 每页显示条数
      */
-    private Integer pageSize = 20;
+    private Integer pageSize = 10;
 
     /**
      * 总页数
