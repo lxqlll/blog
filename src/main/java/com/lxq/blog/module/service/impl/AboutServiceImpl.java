@@ -67,7 +67,7 @@ public class AboutServiceImpl implements AboutService {
         QueryWrapper queryWrapper = new QueryWrapper();//实例化创建QueryWrapper对象
         queryWrapper.eq("deleted",0);//添加条件 是否被删除
         queryWrapper.eq("about_id",id);//添加条件 编号
-        queryWrapper.eq("enable",0);//添加条件 是否启用
+      //  queryWrapper.eq("enable",0);//添加条件 是否启用
         queryWrapper.select(getColumn); //获取查询的列
         About about = aboutMapper.selectOne(queryWrapper); //调用查询方法
        return about;

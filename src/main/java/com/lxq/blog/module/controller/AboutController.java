@@ -101,7 +101,7 @@ public class AboutController {
 
 
     @PostMapping("/getByPage")
-    public Result getByPage(Page page){
+    public Result getByPage(@RequestBody Page page){
         if(page==null)return new Result(ResultEnum.PARAMS_NULL);
         String sortColumn =  page.getSortColumn();//获取排序列
         if(StringUtils.isNotBlank(sortColumn)){ //判断是否为空
