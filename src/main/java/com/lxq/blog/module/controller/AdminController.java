@@ -76,6 +76,7 @@ public class AdminController {
         return new Result(admin);
     }
 
+
     /**
      * 修改个人信息
      * @param admin 管理员实体
@@ -88,6 +89,7 @@ public class AdminController {
         try {
             //调用修改方法
             adminService.updateAdminById(admin);
+            ShiroUtils.setAdmin(admin);
         } catch (MyException myException) {
             myException.printStackTrace();
         }

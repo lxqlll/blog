@@ -29,7 +29,6 @@
     </sql>
 
 
-
     <select id="getByPage" parameterType="com.lxq.blog.utils.Page"  resultMap="BaseResultMap">
         select
             about_id,
@@ -58,7 +57,5 @@
             and about_title like CONCAT('%', #{params.aboutTitle}, '%')
         </if>
     </select>
-
-
 
 </mapper>

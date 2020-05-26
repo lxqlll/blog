@@ -4,6 +4,7 @@ package com.lxq.blog.module.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lxq.blog.module.mapper.BlogMapper;
 import com.lxq.blog.module.pojo.Blog;
+import com.lxq.blog.module.pojo.Type;
 import com.lxq.blog.module.service.BlogService;
 import com.lxq.blog.module.service.TypeService;
 import com.lxq.blog.utils.IdWorker;
@@ -49,6 +50,7 @@ public class BlogServiceImpl implements BlogService {
 
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void saveOrUpdate(Blog blog) {
         //调用查询findBlogById方法
         Blog b = findBlogById(blog.getBlogId());
@@ -56,6 +58,11 @@ public class BlogServiceImpl implements BlogService {
             blog.setBlogId(idWorker.nextId()+"");
             //调用新增方法
             blogMapper.insert(blog);
+            //联级操作
+            Integer blogType = blog.getBlogType();
+            Type type = typeService.queryById(blogType);
+            type.setTypeBlogCount(type.getTypeBlogCount()+1);
+            typeService.saveOrUpdate(type);
         }else {
             //乐观锁
             blog.setVersion(blog.getVersion()+1);
@@ -67,6 +74,19 @@ public class BlogServiceImpl implements BlogService {
             wrapper.eq("version",b.getVersion());
             //调用通过id修改方法
             blogMapper.update(blog,wrapper);
+            //联级操作
+            if (!b.getBlogType().equals(blog.getBlogType())){
+                Integer typeId = blog.getBlogType();
+                Type type = typeService.queryById(typeId);
+                type.setTypeBlogCount(type.getTypeBlogCount()+1);
+                typeService.saveOrUpdate(type);
+            }
+                Integer typeId = b.getBlogType();
+                Type type = typeService.queryById(typeId);
+                if(type.getTypeBlogCount()!=0){
+                    type.setTypeBlogCount(type.getTypeBlogCount()-1);
+                    typeService.saveOrUpdate(type);
+                }
         }
     }
 
@@ -94,10 +114,15 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteBlog(String id) {
         Blog blog = findBlogById(id);
         blog.setDeleted(1);
         blogMapper.updateById(blog);
+        //删除同事帖子分类数-1
+        Type type = typeService.queryById(blog.getBlogType());
+        type.setTypeBlogCount(type.getTypeBlogCount()-1);
+        typeService.saveOrUpdate(type);
     }
 
     @Override

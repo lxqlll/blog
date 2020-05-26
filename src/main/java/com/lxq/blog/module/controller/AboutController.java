@@ -81,10 +81,20 @@ public class AboutController {
      * @return Result 统一返回类型
      */
     @PutMapping("/start/{id}")
-    public Result start(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
-        aboutService.start(id); //调用阅读方法
-        return new Result(ResultEnum.SUCCESS);
+    public Result start(@PathVariable Integer id) {
+        //判断参数是否为空
+        if (null == id) {
+            return new Result(ResultEnum.PARAMS_NULL);
+        }//查询所有
+        List<About> abouts = aboutService.selectListByEnable();
+        //判断是否已有启用
+        if (abouts.size() == 0) {
+            //调用启用方法
+            aboutService.start(id);
+            return new Result(ResultEnum.SUCCESS);
+        }else{
+            return new Result(ResultEnum.ERROR.getCode(),"已存在启用");
+        }
     }
 
     /**

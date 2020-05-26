@@ -3,6 +3,7 @@ package com.lxq.blog.module.controller;
 import com.lxq.blog.enums.ResultEnum;
 import com.lxq.blog.module.pojo.User;
 import com.lxq.blog.module.service.UserService;
+import com.lxq.blog.utils.IdWorker;
 import com.lxq.blog.utils.Page;
 import com.lxq.blog.utils.Result;
 import com.lxq.blog.utils.StringUtils;
@@ -98,4 +99,15 @@ public class UserController {
         page = userService.selectPage(page);
         return new Result(page);
     }
+
+    /**
+     * 获取用户名
+     * @return Result 统一返回类型
+     */
+    @GetMapping(value = "/getUserName")
+    public Result<User> getUserName(){
+        IdWorker idWorker = new IdWorker();
+        return new Result(idWorker.nextId());
+    }
+
 }

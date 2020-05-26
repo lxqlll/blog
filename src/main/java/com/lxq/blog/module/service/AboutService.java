@@ -4,6 +4,8 @@ import com.lxq.blog.exception.MyException;
 import com.lxq.blog.module.pojo.About;
 import com.lxq.blog.utils.Page;
 
+import java.util.List;
+
 /**
  * <p>
  *  闲言服务层
@@ -59,5 +61,9 @@ public interface AboutService {
      */
     Page<About> getByPage(Page page);
 
-
+    /**
+     * 是否启用
+     * @return
+     */
+    List<About> selectListByEnable();
 }

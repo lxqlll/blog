@@ -39,8 +39,17 @@ public class AboutServiceImpl implements AboutService {
     public void saveOrUpdate(About about) throws MyException {
         //调用根据编号查询方法
         About a = aboutMapper.selectById(about.getAboutId());
+        //调用查询是否启用
+        List<About> aboutList = this.selectListByEnable();
         //判断有无数据
         if(null==a){
+            //判断是否存在
+            if (aboutList.size()>=1){
+                about.setEnable(0);
+            }else {
+                about.setEnable(1);
+            }
+            //调用新增方法
             try {
                 aboutMapper.insert(about);
             } catch (Exception e) {
@@ -49,8 +58,10 @@ public class AboutServiceImpl implements AboutService {
         }else {
             Integer version = about.getVersion();
             about.setVersion(about.getVersion()+1);
-            QueryWrapper queryWrapper = new QueryWrapper();//实例化创建QueryWrapper对象
-            queryWrapper.eq("version",version); //添加修改条件
+            //实例化创建QueryWrapper对象
+            QueryWrapper queryWrapper = new QueryWrapper();
+            //添加修改条件
+            queryWrapper.eq("version",version);
             queryWrapper.eq("about_id",about.getAboutId());
             try {
                 aboutMapper.update(about,queryWrapper);
@@ -95,14 +106,15 @@ public class AboutServiceImpl implements AboutService {
         a.setAboutId(about.getAboutId());
         a.setVersion(about.getVersion());
         try {
-            if(null!=about) saveOrUpdate(a); //调用修改方法
+            //调用修改方法
+            if(null!=about) saveOrUpdate(a);
         } catch (MyException myException) {
             new MyException("删除失败!");
         }
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void start(Integer id)  {
         About about = aboutMapper.selectById(id);
         if (null!=about) {
@@ -112,7 +124,7 @@ public class AboutServiceImpl implements AboutService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void disable(Integer id)  {
         About about = aboutMapper.selectById(id);
         if (null!=about) {
@@ -126,9 +138,9 @@ public class AboutServiceImpl implements AboutService {
     @Override
     public Page<About> getByPage(Page page) {
         //查询所有数据
-        List<About> blogVoList = aboutMapper.getByPage(page);
+        List<About> aboutList = aboutMapper.getByPage(page);
         //将数据放入page的集合中
-        page.setList(blogVoList);
+        page.setList(aboutList);
         //查询数据记录
         int count = aboutMapper.getCountByPage(page);
         //将数据放入page中
@@ -136,5 +148,12 @@ public class AboutServiceImpl implements AboutService {
         return page;
     }
 
+    @Override
+    public List<About> selectListByEnable() {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("enable",1);
+        queryWrapper.eq("deleted",0);
+        return aboutMapper.selectList(queryWrapper);
+    }
 
 }
