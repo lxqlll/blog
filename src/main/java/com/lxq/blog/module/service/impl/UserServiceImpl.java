@@ -5,11 +5,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lxq.blog.module.mapper.UserMapper;
 import com.lxq.blog.module.pojo.User;
 import com.lxq.blog.module.service.UserService;
+import com.lxq.blog.utils.Md5Utils;
 import com.lxq.blog.utils.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * <p>
@@ -22,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl  implements UserService {
 
     /**
      * 声明UserMapper对象
@@ -74,5 +77,24 @@ public class UserServiceImpl implements UserService {
         page.setList(userMapper.getByPage(page));
         page.setTotalCount(userMapper.getCountByPage(page));
         return page;
+    }
+
+    @Override
+    public void updateBatchById(List<Integer> userIdList) {
+
+        List<User> list = userMapper.getListByIds(userIdList);
+
+
+//        List<User> userIds = userIdList.stream().map(e -> {
+//            User user = new User();
+//            user.setPassword(Md5Utils.toMD5("123456"));
+//            user.setUserId(e);
+//            return user;
+//        }).collect(Collectors.toList());
+//        userMapper.updateBatchById(userIds);
+        list.forEach(e->{
+            e.setPassword(Md5Utils.toMD5("123456"));
+            saveOrUpdate(e);
+        });
     }
 }

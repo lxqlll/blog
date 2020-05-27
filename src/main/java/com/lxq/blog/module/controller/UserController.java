@@ -83,9 +83,10 @@ public class UserController {
         //获取排序列
         String sortColumn =  page.getSortColumn();
         //判断是否为空
+
         if(StringUtils.isNotBlank(sortColumn)){
             //创建数组
-            String[] sortColumns = {"artist", "created_time", "enabled"};
+                String[] sortColumns = {"sex", "created_time", "update_time"};
             //将数组转化为集合
             List<String> sortList= Arrays.asList(sortColumns);
             /**
@@ -107,7 +108,22 @@ public class UserController {
     @GetMapping(value = "/getUserName")
     public Result<User> getUserName(){
         IdWorker idWorker = new IdWorker();
-        return new Result(idWorker.nextId());
+        String id = idWorker.nextId()+"";
+        String id2 = id.substring(id.length()-6,id.length());
+        return new Result("随机用户名",id2);
     }
+
+    /**
+     * 获取用户名
+     * @return Result 统一返回类型
+     */
+    @PutMapping(value = "/passwordReset")
+    public Result<User> passwordReset(@RequestBody List<Integer> userIds){
+        userService.updateBatchById(userIds);
+        return new Result("重置密码成功");
+    }
+
+
+
 
 }

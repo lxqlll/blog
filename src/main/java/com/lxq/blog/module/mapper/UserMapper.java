@@ -24,4 +24,5 @@ public interface UserMapper extends BaseMapper<User> {
 
   List<User> getByPage(Page page);
 
+  List<User> getListByIds(List<Integer> ids);
 }

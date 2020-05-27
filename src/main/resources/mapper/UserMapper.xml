@@ -24,6 +24,7 @@
 
 
 
+
     <select id="getByPage" parameterType="com.lxq.blog.utils.Page" resultMap="BaseResultMap">
         select
         user_id, username, name, sex, header, nickname, user_email, created_time, update_time
@@ -75,6 +76,20 @@
         </if>
     </select>
 
+    <select id="getListByIds" resultType="com.lxq.blog.module.pojo.User" parameterType="list">
+        select
+                user_id,version
+        from
+                bl_user
+        where
+                user_id
+        in
+        <foreach collection="list"  item="userIds" open="(" separator="," close=")" >
+                #{userIds}
+        </foreach>
+        and
+                deleted = 0
+    </select>
 
 
 </mapper>

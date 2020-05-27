@@ -53,14 +53,14 @@ public class LogController {
     public Result deleteById(@PathVariable Integer id){
         if (null==id)return new Result(ResultEnum.PARAMS_NULL);
         logService.delete(id);
-        return new Result(200,"删除成功");
+        return new Result(ResultEnum.SUCCESS.getCode(),"删除成功");
     }
 
     @DeleteMapping("/deleteByIds")
-    public Result deleteByIds(@RequestBody List<Integer> ids){
-        if (null==ids && ids.size()>0)return new Result(ResultEnum.PARAMS_NULL);
-        logService.batchDelete(ids);
-        return new Result(200,"删除成功");
+    public Result deleteByIds(@RequestBody List<Integer> logIdList){
+        if (null==logIdList && logIdList.size()>0)return new Result(ResultEnum.PARAMS_NULL);
+        logService.batchDelete(logIdList);
+        return new Result(ResultEnum.SUCCESS.getCode(),"删除成功");
     }
 
 }

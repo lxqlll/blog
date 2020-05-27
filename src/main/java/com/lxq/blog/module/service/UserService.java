@@ -4,6 +4,8 @@ package com.lxq.blog.module.service;
 import com.lxq.blog.module.pojo.User;
 import com.lxq.blog.utils.Page;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户表服务层接口
@@ -13,7 +15,7 @@ import com.lxq.blog.utils.Page;
  * @date 2020年5月12日16:30:14
  * @Version 1.0
  */
-public interface UserService {
+public interface UserService  {
 
     /**
      * 新增或者修改
@@ -43,6 +45,9 @@ public interface UserService {
      */
     Page selectPage(Page page);
 
-
-
+    /**
+     * 重置密码
+     * @param userIdList 集合
+     */
+    void updateBatchById(List<Integer> userIdList);
 }
