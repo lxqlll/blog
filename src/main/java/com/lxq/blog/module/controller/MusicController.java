@@ -129,6 +129,4 @@ public class MusicController {
         page = musicService.getList(page);
         return new Result(page);
     }
-
-
 }

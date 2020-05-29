@@ -14,16 +14,43 @@ import lombok.Data;
 @Data
 @TableName("bl_music")
 public class Music {
+    /**
+     * 编号
+     */
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
+    /**
+     * 歌曲名
+     */
     private String name;
+    /**
+     * 歌手
+     */
     private String artist;
+    /**
+     * 歌曲链接
+     */
     private String url;
+    /**
+     * 封面
+     */
     private String cover;
+    /**
+     * 歌词
+     */
     private String lrc;
+    /**
+     * 创建时间
+     */
     private String createdTime;
-    @TableField("enable")
+    /**
+     * 是否启用
+     */
+    @TableField("enabled")
     private Integer enabled;
+    /**
+     * 是否删除
+     */
     private Integer deleted;
 
 }

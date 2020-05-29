@@ -26,12 +26,12 @@ public interface MusicMapper extends BaseMapper<Music> {
      * @param page 分页对象
      * @return list 集合
      */
-    List<Music> getList(@Param("page")Page page);
+    List<Music> getList(Page page);
 
     /**
      * 分页总记录数
      * @param page 分页对象
      * @return Integer 整形
      */
-    Integer getCountByPage(@Param("page")Page page);
+    Integer getCountByPage(Page page);
 }

@@ -27,7 +27,7 @@
         deleted
     </sql>
 
-    <select id="getByPage" resultMap="BaseResultMap">
+    <select id="getList" resultMap="BaseResultMap">
         select
         id,
         name,
