@@ -30,7 +30,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 //        filterMap.put("/login/getAdmin", "anon");
 
 
-    private static String []  whiteList = {"/link/getLink"};
+    private static String []  whiteList = {"/link/getLink/"};
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -57,7 +57,7 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     private boolean containsWhiteList(String s){
         for (String url : whiteList) {
-            if (url.equals(s.toLowerCase())){
+            if (s.contains(url)){
                 return true;
             }
         }

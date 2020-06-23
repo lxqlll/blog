@@ -47,7 +47,7 @@ public class ShiroConfig {
         Map<String, String> filterMap = Maps.newLinkedHashMap();
 
         //友情链接
-        filterMap.put("/link/getLink", "anon");
+        filterMap.put("/link/getLink/", "anon");
         filterMap.put("/link/getLinkById/*", "anon");
         //音乐欣赏
         filterMap.put("/music/page", "anon");
