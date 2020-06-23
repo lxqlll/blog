@@ -14,7 +14,7 @@ spring:
     # 基本属性
     driverClassName: com.mysql.jdbc.Driver        #加载驱动
     name: dev
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone = GMT
+    url: jdbc:mysql://111.230.202.74:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone = GMT
     username: root
     password: 123456
     # 可以不配置，根据url自动识别，建议配置

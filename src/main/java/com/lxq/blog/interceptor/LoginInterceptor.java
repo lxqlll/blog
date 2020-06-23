@@ -46,6 +46,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                 return  true;
             }
         }
+
        throw new MyException(ResultEnum.NOT_LOGIN.getCode(),"当前账号未登录");
     }
 
