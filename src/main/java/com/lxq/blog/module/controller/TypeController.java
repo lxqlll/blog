@@ -46,7 +46,8 @@ public class TypeController {
      */
     @GetMapping(value = "/getTypeById/{id}")
     public Result<Type> getTypeById(@PathVariable Integer id){
-        if(null==id)return new Result<>(ResultEnum.PARAMS_NULL);    //判断参数是否为空
+        //判断参数是否为空
+        if(null==id)return new Result<>(ResultEnum.PARAMS_NULL);
         return new Result(typeService.queryById(id));
     }
 
@@ -75,8 +76,10 @@ public class TypeController {
      */
     @DeleteMapping(value = "/deleteById/{id}")
     public Result<Type> deleteById(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
-        if (typeService.deleteById(id)) { //删除方法
+        //判断参数是否为空
+        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
+        //删除方法
+        if (typeService.deleteById(id)) {
             return new Result(ResultEnum.SUCCESS.getCode(),"删除成功");
         }else {
             return new Result(ResultEnum.ERROR.getCode(),"删除失败");
@@ -84,29 +87,35 @@ public class TypeController {
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * 启用分类
+     * @param id 编号
+     * @return Result 统一返回类型
      */
     @PutMapping(value = "/stater/{id}")
     public Result staterTypeById(@PathVariable Integer id){
+        //实例化创建Type对象
         Type type = new Type();
+        //赋值
         type.setTypeId(id);
         type.setEnable(1);
+        //调用修改方法
         typeService.updateById(type);
         return new Result(ResultEnum.SUCCESS.getCode(),"启用成功");
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * 禁用方法
+     * @param id 编号
+     * @return Result 统一返回类型
      */
     @PutMapping(value = "/disabled/{id}")
     public Result disabledTypeById(@PathVariable Integer id){
+        //实例化创建Type对象
         Type type = new Type();
+        //赋值
         type.setTypeId(id);
         type.setEnable(0);
+        //调用修改方法
         typeService.updateById(type);
         return new Result(ResultEnum.SUCCESS.getCode(),"禁用成功");
     }

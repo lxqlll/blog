@@ -19,13 +19,7 @@
     </properties>
 
     <dependencies>
-             
-        <!-- redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-     
+
         <!-- https://mvnrepository.com/artifact/com.github.tobato/fastdfs-client -->
         <dependency>
             <groupId>com.github.tobato</groupId>
@@ -179,7 +173,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.13</version>
                 <configuration>
-                    <imageName>106.53.102.135:5000/${project.artifactId}:${project.version}
+                    <imageName>111.230.202.74:5000/${project.artifactId}:${project.version}
                     </imageName>
                     <baseImage>jdk1.8</baseImage>
                     <entryPoint>["java", "-jar","/${project.build.finalName}.jar"]</entryPoint>
@@ -191,7 +185,7 @@
                             <include>${project.build.finalName}.jar</include>
                         </resource>
                     </resources>
-                    <dockerHost>http://106.53.102.135:2375</dockerHost>
+                    <dockerHost>http://111.230.202.74:2375</dockerHost>
                 </configuration>
             </plugin>
         </plugins>

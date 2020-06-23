@@ -1,11 +1,15 @@
 package com.lxq.blog.module.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lxq.blog.excel.entity.ExportParams;
+import com.lxq.blog.excel.handler.ExcelExportHandler;
 import com.lxq.blog.module.mapper.LogMapper;
 import com.lxq.blog.module.pojo.Log;
 import com.lxq.blog.module.service.LogService;
 import com.lxq.blog.utils.Page;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +60,16 @@ public class LogServiceImpl implements LogService {
     @Override
     public void batchDelete(List<Integer> ids) {
         logMapper.deleteBatchIds(ids);
+    }
+
+    @Override
+    public Workbook export() {
+        String  [] clounm= { "log_id", "log_url", "log_status", "log_message",
+                "log_method", "log_time", "log_ip","created_time"};
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.select(clounm);
+        List<Log> logList = logMapper.selectList(null);
+        return new ExcelExportHandler().createSheet(new ExportParams("最新日志", "sheet1"), Log.class, logList);
     }
 
 }

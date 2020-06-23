@@ -84,7 +84,6 @@ public class UserServiceImpl  implements UserService {
 
         List<User> list = userMapper.getListByIds(userIdList);
 
-
 //        List<User> userIds = userIdList.stream().map(e -> {
 //            User user = new User();
 //            user.setPassword(Md5Utils.toMD5("123456"));

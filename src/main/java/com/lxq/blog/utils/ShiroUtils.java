@@ -23,7 +23,6 @@ public class ShiroUtils {
     }
 
 
-
     /**
      * 切换身份，登录后，动态更改subject的用户属性
      * @param adminInfo

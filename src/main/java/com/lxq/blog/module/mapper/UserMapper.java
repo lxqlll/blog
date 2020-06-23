@@ -19,10 +19,24 @@ import java.util.List;
  */
 @Component
 public interface UserMapper extends BaseMapper<User> {
-
+  /**
+   * 总记录数
+   * @param page 分页对象
+   * @return Integer 整形
+   */
   Integer getCountByPage(Page page);
 
+  /**
+   * 分页查询
+   * @param page  分页对象
+   * @return list 集合 大小大于0执行成功
+   */
   List<User> getByPage(Page page);
 
+  /**
+   * 重置密码
+   * @param ids 集合
+   * @return  list 集合 大小大于0执行成功
+   */
   List<User> getListByIds(List<Integer> ids);
 }

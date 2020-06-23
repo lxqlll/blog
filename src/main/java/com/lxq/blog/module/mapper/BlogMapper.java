@@ -20,8 +20,16 @@ import java.util.List;
  */
 @Component
 public interface BlogMapper extends BaseMapper<Blog> {
-
+    /**
+     * 分页查询
+     * @param page  分页对象
+     * @return list 集合 大小大于0执行成功
+     */
     public List<BlogVo> getByPage(Page<BlogVo> page);
-
+    /**
+     * 总记录数
+     * @param page 分页对象
+     * @return Integer 整形
+     */
     public Integer getCountByPage(Page<BlogVo> page);
 }

@@ -36,8 +36,10 @@ public class UserController {
      */
     @PostMapping(value = "/saveOrUpdate")
     public Result<User> saveOrUpdate(@RequestBody User user){
-        if(null==user)return new Result<>(ResultEnum.PARAMS_NULL);//判断参数是否为空
-        if (userService.saveOrUpdate(user)) {   //判断有无数据
+        //判断参数是否为空
+        if(null==user)return new Result<>(ResultEnum.PARAMS_NULL);
+        //判断有无数据
+        if (userService.saveOrUpdate(user)) {
             return new Result(ResultEnum.SUCCESS);
         }else {
             return new Result(ResultEnum.ERROR);
@@ -51,7 +53,8 @@ public class UserController {
      */
     @GetMapping(value = "/list/{id}")
     public Result<User> getMusicById(@PathVariable Integer id){
-        if(null==id)return new Result<>(ResultEnum.PARAMS_NULL);    //判断参数是否为空
+        //判断参数是否为空
+        if(null==id)return new Result<>(ResultEnum.PARAMS_NULL);
         return new Result(userService.queryById(id));
     }
 
@@ -65,7 +68,8 @@ public class UserController {
     public Result<User> deleteById(@PathVariable Integer id){
         //判断参数是否为空
         if (null==id)return new Result(ResultEnum.PARAMS_NULL);
-        if (userService.deleteById(id)) { //删除方法
+        //删除方法
+        if (userService.deleteById(id)) {
             return new Result(ResultEnum.SUCCESS.getCode(),"删除成功");
         }else {
             return new Result(ResultEnum.ERROR.getCode(),"删除失败");
@@ -83,7 +87,6 @@ public class UserController {
         //获取排序列
         String sortColumn =  page.getSortColumn();
         //判断是否为空
-
         if(StringUtils.isNotBlank(sortColumn)){
             //创建数组
                 String[] sortColumns = {"sex", "created_time", "update_time"};
@@ -107,8 +110,11 @@ public class UserController {
      */
     @GetMapping(value = "/getUserName")
     public Result<User> getUserName(){
+        //雪花算法
         IdWorker idWorker = new IdWorker();
+        //注册 随机id                =================               不使用了
         String id = idWorker.nextId()+"";
+        //id统一长度为后6位
         String id2 = id.substring(id.length()-6,id.length());
         return new Result("随机用户名",id2);
     }
@@ -119,6 +125,7 @@ public class UserController {
      */
     @PutMapping(value = "/passwordReset")
     public Result<User> passwordReset(@RequestBody List<Integer> userIds){
+        //重置密码
         userService.updateBatchById(userIds);
         return new Result("重置密码成功");
     }

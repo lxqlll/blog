@@ -2,7 +2,7 @@ package com.lxq.blog.excel.constant;
 
 /**
  * java类型常量
- * @Author: lxq User
+ * @Author: lxq
  * @Date: 2019/12/1 15:37
  * @Version 1.0
  */

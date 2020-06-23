@@ -37,8 +37,10 @@ public class MusicController {
      */
     @PostMapping(value = "/saveOrUpdate")
     public Result<Music> saveOrUpdate(@RequestBody Music music){
-        if(null==music)return new Result<>(ResultEnum.PARAMS_NULL);//判断参数是否为空
-        if (musicService.saveOrUpdate(music)) {   //判断有无数据
+        //判断参数是否为空
+        if(null==music)return new Result<>(ResultEnum.PARAMS_NULL);
+        //判断有无数据
+        if (musicService.saveOrUpdate(music)) {
             return new Result(ResultEnum.SUCCESS);
         }else {
             return new Result(ResultEnum.ERROR);
@@ -52,7 +54,8 @@ public class MusicController {
      */
     @GetMapping(value = "/list/{id}")
     public Result<Music> getMusicById(@PathVariable Integer id){
-        if(null==id)return new Result<>(ResultEnum.PARAMS_NULL);    //判断参数是否为空
+        //判断参数是否为空
+        if(null==id)return new Result<>(ResultEnum.PARAMS_NULL);
         return new Result(musicService.queryById(id));
     }
 
@@ -64,8 +67,10 @@ public class MusicController {
      */
     @DeleteMapping(value = "/deleteById/{id}")
     public Result<Music> deleteById(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
-        if (musicService.deleteById(id)) { //删除方法
+        //判断参数是否为空
+        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
+        //删除方法
+        if (musicService.deleteById(id)) {
             return new Result(ResultEnum.SUCCESS.getCode(),"删除成功");
         }else {
             return new Result(ResultEnum.ERROR.getCode(),"删除失败");
@@ -79,8 +84,10 @@ public class MusicController {
      */
     @PutMapping("/start/{id}")
     public Result start(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
-        musicService.start(id); //调用阅读方法
+        //判断参数是否为空
+        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
+        //调用阅读方法
+        musicService.start(id);
         return new Result(ResultEnum.SUCCESS);
     }
 
@@ -91,8 +98,10 @@ public class MusicController {
      */
     @PutMapping("/forbidden/{id}")
     public Result forbidden(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
-        musicService.forbidden(id); //调用阅读方法
+        //判断参数是否为空
+        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
+        //调用阅读方法
+        musicService.forbidden(id);
         return new Result(ResultEnum.SUCCESS);
     }
 
@@ -114,10 +123,14 @@ public class MusicController {
      */
     @PostMapping("/page")
     public Result page(@RequestBody Page page){
-        String sortColumn =  page.getSortColumn();//获取排序列
-        if(StringUtils.isNotBlank(sortColumn)){ //判断是否为空
-            String[] sortColumns = {"artist", "created_time", "enabled"};   //创建数组
-            List<String> sortList= Arrays.asList(sortColumns); //将数组转化为集合
+        //获取排序列
+        String sortColumn =  page.getSortColumn();
+        //判断是否为空
+        if(StringUtils.isNotBlank(sortColumn)){
+            //创建数组
+            String[] sortColumns = {"artist", "created_time", "enabled"};
+            //将数组转化为集合
+            List<String> sortList= Arrays.asList(sortColumns);
             /**
              * contains方法是否包含字符
              * toLowerCase转化为小写
@@ -126,6 +139,7 @@ public class MusicController {
                 return new Result<>(ResultEnum.PARAMS_ERROR.getCode(), "排序参数不合法！");
             }
         }
+        //分页方法
         page = musicService.getList(page);
         return new Result(page);
     }

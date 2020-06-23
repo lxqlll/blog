@@ -63,7 +63,7 @@ public interface AboutService {
 
     /**
      * 是否启用
-     * @return
+     * @return list 集合 返回大于0执行成功
      */
     List<About> selectListByEnable();
 }

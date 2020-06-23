@@ -25,11 +25,12 @@ public class UploadController {
 
     /**
      * 上传文件
-     * @param file
-     * @return
+     * @param file 文件
+     * @return Result 统一返回类型
      */
     @RequestMapping(value = "/uploadImage",method = RequestMethod.POST)
     public Result fileUpload(MultipartFile file){
+        //获取上次成功的文件地址 用户上传文件成功回显
         String url = uploadService.uploadImage(file);
         return new Result(ResultEnum.SUCCESS.getCode(),"上传文件成功",url);
     }

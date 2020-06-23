@@ -31,6 +31,9 @@ import java.util.Arrays;
 @Slf4j
 public class RequestAspect {
 
+    /**
+     * 声明LogService对象
+     */
     @Autowired
     private LogService logService;
 
@@ -68,8 +71,7 @@ public class RequestAspect {
 
     /**
      * 后置通知
-     *
-     * @param ret
+     * @param ret 对象
      */
     @AfterReturning(returning = "ret", pointcut = "logPointCut()")
     public void doAfterReturning(Object ret) {
@@ -82,9 +84,6 @@ public class RequestAspect {
 
     /**
      * 异常通知
-     *
-     * @param joinPoint
-     * @param e
      */
     @AfterThrowing(pointcut = "logPointCut()", throwing = "e")
     public void saveExceptionLog(JoinPoint joinPoint, Throwable e) {
@@ -98,10 +97,6 @@ public class RequestAspect {
 
     /**
      * 打印请求日志
-     *
-     * @param joinPoint
-     * @param request
-     * @param uri
      */
     private void printRequestLog(JoinPoint joinPoint, HttpServletRequest request, String uri) {
         // 拿到切面方法

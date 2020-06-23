@@ -32,9 +32,11 @@ public class LinkController {
      */
     @PostMapping(value = "/saveOrUpdate")
     public Result saveOrUpdateLink(@RequestBody Link link) throws MyException {
-        if (null==link)return new Result(ResultEnum.PARAMS_NULL);   //判断参数是否为空
+        //判断参数是否为空
+        if (null==link)return new Result(ResultEnum.PARAMS_NULL);
         try {
-            linkService.saveOrUpdate(link); //调用修改或者删除方法
+            //调用修改或者删除方法
+            linkService.saveOrUpdate(link);
         } catch (Exception e) {
             throw new MyException("添加或者修改失败");
         }
@@ -48,7 +50,9 @@ public class LinkController {
      */
     @DeleteMapping(value = "/deleteLink/{id}")
     public Result deleteLink(@PathVariable Integer id) throws MyException {
+        //判断有无参数
         if (null==id)return new Result(ResultEnum.PARAMS_NULL);
+        //调用删除方法
         linkService.deleteLink(id);
         return new Result(ResultEnum.SUCCESS.getCode(),"删除成功");
     }
@@ -60,7 +64,8 @@ public class LinkController {
      */
     @GetMapping(value = "/getLinkById/{id}")
     public Result getLinkById(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
+        //判断参数是否为空
+        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
         return new Result(linkService.getLinkById(id));
     }
 

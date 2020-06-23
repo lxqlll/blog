@@ -61,6 +61,7 @@ public class AdminController {
         Serializable serializable = subject.getSession().getId();
         //实例化创建map集合
         Map<String,Object> resultMap = new HashMap<>(2);
+        //添加数据
         resultMap.put("token",serializable);
         return new Result(resultMap);
     }
@@ -71,7 +72,9 @@ public class AdminController {
      */
     @GetMapping(value = "/getAdmin")
     public Result getAdmin(){
+        //获取用户信息
         Admin admin = (Admin) ShiroUtils.getLoginUser();
+        //密码为空 ======== 密码不能传入
         admin.setPassword("");
         return new Result(admin);
     }
@@ -89,6 +92,7 @@ public class AdminController {
         try {
             //调用修改方法
             adminService.updateAdminById(admin);
+            //动态更新shiro的缓存
             ShiroUtils.setAdmin(admin);
         } catch (MyException myException) {
             myException.printStackTrace();

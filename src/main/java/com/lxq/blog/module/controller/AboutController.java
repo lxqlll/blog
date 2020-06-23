@@ -35,8 +35,10 @@ public class AboutController {
      */
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody About about)throws MyException {
-        if (null==about)return new Result(ResultEnum.PARAMS_ERROR); //判断参数是否为空
-        aboutService.saveOrUpdate(about);  //调用新增或者修改方法
+        //判断参数是否为空
+        if (null==about)return new Result(ResultEnum.PARAMS_ERROR);
+        //调用新增或者修改方法
+        aboutService.saveOrUpdate(about);
         return new Result(ResultEnum.SUCCESS);
     }
 
@@ -47,7 +49,8 @@ public class AboutController {
      */
     @GetMapping("/getById/{id}")
     public Result getById(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
+        //判断参数是否为空
+        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
         return new Result(aboutService.getAboutById(id));
     }
 
@@ -58,8 +61,10 @@ public class AboutController {
      */
     @DeleteMapping("/deleteById/{id}")
     public Result deleteById(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
-        aboutService.deleteAbout(id); //调用删除方法
+        //判断参数是否为空
+        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
+        //调用删除方法
+        aboutService.deleteAbout(id);
         return new Result(ResultEnum.SUCCESS);
     }
 
@@ -70,8 +75,10 @@ public class AboutController {
      */
     @GetMapping("/reading/{id}")
     public Result reading(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
-        About about = aboutService.readingAbout(id);//调用阅读方法
+        //判断参数是否为空
+        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
+        //调用阅读方法
+        About about = aboutService.readingAbout(id);
         return new Result(about);
     }
 
@@ -85,7 +92,8 @@ public class AboutController {
         //判断参数是否为空
         if (null == id) {
             return new Result(ResultEnum.PARAMS_NULL);
-        }//查询所有
+        }
+        //查询所有
         List<About> abouts = aboutService.selectListByEnable();
         //判断是否已有启用
         if (abouts.size() == 0) {
@@ -104,8 +112,10 @@ public class AboutController {
      */
     @PutMapping("/disable/{id}")
     public Result disable(@PathVariable Integer id){
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL); //判断参数是否为空
-        aboutService.disable(id); //调用阅读方法
+        //判断参数是否为空
+        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
+        //调用阅读方法
+        aboutService.disable(id);
         return new Result(ResultEnum.SUCCESS);
     }
 
@@ -113,10 +123,14 @@ public class AboutController {
     @PostMapping("/getByPage")
     public Result getByPage(@RequestBody Page page){
         if(page==null)return new Result(ResultEnum.PARAMS_NULL);
-        String sortColumn =  page.getSortColumn();//获取排序列
-        if(StringUtils.isNotBlank(sortColumn)){ //判断是否为空
-            String [] sortColumns = { "about_read", "created_time", "update_time"};    //创建数组
-            List<String> sortList= Arrays.asList(sortColumns); //将数组转化为集合
+        //获取排序列
+        String sortColumn =  page.getSortColumn();
+        //判断是否为空
+        if(StringUtils.isNotBlank(sortColumn)){
+            //创建数组
+            String [] sortColumns = { "about_read", "created_time", "update_time"};
+            //将数组转化为集合
+            List<String> sortList= Arrays.asList(sortColumns);
             /**
              * contains方法是否包含字符
              * toLowerCase转化为小写
@@ -125,6 +139,7 @@ public class AboutController {
                 return new Result<>(ResultEnum.PARAMS_ERROR.getCode(), "排序参数不合法！");
             }
         }
+        //调用分页方法
         page = aboutService.getByPage(page);
         return new Result(page);
     }

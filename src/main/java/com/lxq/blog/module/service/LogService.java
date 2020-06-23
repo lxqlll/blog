@@ -3,6 +3,7 @@ package com.lxq.blog.module.service;
 
 import com.lxq.blog.module.pojo.Log;
 import com.lxq.blog.utils.Page;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.List;
 
@@ -41,4 +42,10 @@ public interface LogService {
      * @param ids 集合
      */
     void batchDelete(List<Integer> ids);
+
+    /**
+     * 全部数据导入excel
+     * @return
+     */
+    Workbook export();
 }

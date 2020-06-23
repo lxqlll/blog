@@ -45,6 +45,18 @@ public class ShiroConfig {
          *  role：该资源必须得到角色权限才可以访问
          */
         Map<String, String> filterMap = Maps.newLinkedHashMap();
+
+        //友情链接
+        filterMap.put("/link/getLink", "anon");
+        filterMap.put("/link/getLinkById/*", "anon");
+        //音乐欣赏
+        filterMap.put("/music/page", "anon");
+        filterMap.put("/music/list", "anon");
+        //关于
+        filterMap.put("/about/*", "anon");
+
+        filterMap.put("/login/getAdmin", "anon");
+
         filterMap.put("/*/login", "anon");
         filterMap.put("/**", "authc");
 

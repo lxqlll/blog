@@ -37,7 +37,7 @@ public class BlogController {
     @PostMapping("/saveOrUpdate")
     public Result saveOrUpdate(@RequestBody Blog blog){
         if (blog==null)return new Result(ResultEnum.PARAMS_NULL);   //判断有无数据
-        blogService.saveOrUpdate(blog);
+        blogService.saveOrUpdate(blog); //调用新增或者修改方法
         return new Result(ResultEnum.SUCCESS);
     }
 
@@ -77,7 +77,8 @@ public class BlogController {
 
     /**
      * 分页查询
-     * @return
+     * @param page 分页对象
+     * @return Result 统一返回类型
      */
     @PostMapping("/pageBlog")
     public Result pageBlog(@RequestBody Page page){
@@ -98,6 +99,7 @@ public class BlogController {
                 return new Result<>(ResultEnum.PARAMS_ERROR.getCode(), "排序参数不合法！");
             }
         }
+        //分页查询
         page = blogService.getByPage(page);
         return new Result(page);
     }

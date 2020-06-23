@@ -26,9 +26,14 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class AdminServiceImpl implements AdminService {
 
+    /**
+     * 打印日志
+     */
     Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
-    //声明AdminMapper对象
+    /**
+     * 声明AdminMapper对象
+     */
     @Autowired
     private AdminMapper adminMapper;
 
@@ -51,15 +56,20 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void updateAdminById(Admin admin) throws MyException {
-        Admin a = getAdmin(admin.getId()); //调用id查询方法
-        if (null == a){//判断有无数据
+        //调用id查询方法
+        Admin a = getAdmin(admin.getId());
+        //判断有无数据
+        if (null == a){
             throw new MyException("修改失败,未查询到数据");
         }else {
+            //判断有无数据
             if(StringUtils.isBlank(admin.getPassword())){
+                //设置密码
                 admin.setPassword(a.getPassword());
             }else if(!StringUtils.isBlank(admin.getPassword()) && admin.getId()!=null){
                 logger.info("[我只改密码]==>测试");
             }
+            //实例化创建QueryWrapper对象
             QueryWrapper queryWrapper = new QueryWrapper();
             queryWrapper.eq("id",admin.getId());
             adminMapper.update(admin,queryWrapper);

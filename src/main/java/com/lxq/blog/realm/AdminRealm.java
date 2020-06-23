@@ -27,8 +27,8 @@ public class AdminRealm extends AuthorizingRealm {
 
     /**
      * 授权方法
-     * @param principalCollection
-     * @return
+     * @param principalCollection 凭证
+     * @return SimpleAuthorizationInfo 身份验证
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -38,8 +38,8 @@ public class AdminRealm extends AuthorizingRealm {
     /**
      * 登录方法
      * @param authenticationToken
-     * @return
-     * @throws AuthenticationException
+     * @return SimpleAuthenticationInfo 身份验证
+     * @throws AuthenticationException 异常
      */
     @SneakyThrows
     @Override

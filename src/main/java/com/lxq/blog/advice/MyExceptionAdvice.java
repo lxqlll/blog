@@ -17,10 +17,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 public class MyExceptionAdvice {
 
+    /**
+     * 异常管理
+     * @param myException 自定义异常
+     * @return Result 统一返回类型
+     */
     @ExceptionHandler(MyException.class)
     @ResponseBody
     public Result execptionHandler(MyException myException){
-        log.error("统一异常处理",myException);
+        log.error("[统一异常处理]",myException);
         return new Result(myException.getMessage(), myException.getErrorCode());
     }
 }

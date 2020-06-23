@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * 评论表Mapper
  * </p>
  *
- * @author 稽哥
+ * @author lxq
  * @date 2020-02-07 14:04:12
  * @Version 1.0
  */

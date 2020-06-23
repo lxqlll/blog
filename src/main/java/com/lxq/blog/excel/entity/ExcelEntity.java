@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 /**
  * Excel注解对应的实体类
  *
- * @Author: lxq User
+ * @Author: lxq
  * @Date: 2019/11/30 9:13
  * @Version 1.0
  */

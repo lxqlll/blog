@@ -21,8 +21,13 @@ public enum ResultEnum {
     DELETE_ERROR(404,"删除失败"),
     PARAMS_ERROR(405,"排序参数不合法")
     ;
-
+    /**
+     * 状态码
+     */
     private Integer code;
+    /**
+     * 消息
+     */
     private String msg;
 
     ResultEnum(Integer code,String msg){

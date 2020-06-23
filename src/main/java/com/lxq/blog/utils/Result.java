@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * 统一返回结果
  *
- * @Author: 杨德石
+ * @Author: lxq
  * @Date: 2020/2/9 14:26
  * @Version 1.0
  */
