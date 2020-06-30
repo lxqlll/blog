@@ -3,6 +3,7 @@ package com.lxq.blog.module.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lxq.blog.module.mapper.BlogMapper;
+import com.lxq.blog.module.mapper.TypeMapper;
 import com.lxq.blog.module.pojo.Blog;
 import com.lxq.blog.module.pojo.Type;
 import com.lxq.blog.module.service.BlogService;
@@ -16,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -47,6 +50,7 @@ public class BlogServiceImpl implements BlogService {
      */
     @Autowired
     private IdWorker idWorker;
+
 
 
     @Override
@@ -123,20 +127,20 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public BlogVo readById(String id) {
+    public Blog readById(String id) {
         //通过编号查询方法
         Blog blog =  findBlogById(id);
         //阅读数加1
         blog.setBlogRead(blog.getBlogRead()+1);
         //调用修改方法
-        saveOrUpdate(blog);
+        blogMapper.updateById(blog);
         //分类和博客vo
         BlogVo blogVo = new BlogVo();
         //复制 方法
         BeanUtils.copyProperties(blog,blogVo);
         //赋值
         blogVo.setType(typeService.queryById(blog.getBlogType()));
-        return blogVo;
+        return blog;
     }
 
     @Override
@@ -168,5 +172,15 @@ public class BlogServiceImpl implements BlogService {
         //将数据放入page中
         page.setTotalCount(count);
         return page;
+    }
+
+    @Override
+    public List<BlogVo> recommendReading() {
+        return blogMapper.recomRead();
+    }
+
+    @Override
+    public List<BlogVo> getTimeLine() {
+        return blogMapper.getTimeLine();
     }
 }

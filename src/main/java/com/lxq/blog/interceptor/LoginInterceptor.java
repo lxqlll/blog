@@ -30,7 +30,20 @@ public class LoginInterceptor implements HandlerInterceptor {
 //        filterMap.put("/login/getAdmin", "anon");
 
 
-    private static String []  whiteList = {"/link/getLink/"};
+    private static String []  whiteList = {
+            "/link/getLink",
+            "/music/list",
+            "/admin/getAdmin",
+            "/type/getType",
+            "/type/getTypeCount",
+            "/about/reading",
+            "/blog/recommendBlog",
+            "/blog/pageBlog",
+            "/blog/read",
+            "/blog/getTimeLine",
+            "/user/register",
+            "/user/login",
+    };
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -41,12 +54,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         String token = request.getHeader("Authorization");
         //判断token是非为控
         if(!StringUtils.isBlank(token)){
-            Admin admin = (Admin) ShiroUtils.getLoginUser();
-            if (admin!=null){
+            Object loginUser = ShiroUtils.getLoginUser();
+            if (loginUser!=null){
                 return  true;
             }
         }
-
        throw new MyException(ResultEnum.NOT_LOGIN.getCode(),"当前账号未登录");
     }
 
@@ -63,5 +75,4 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         return false;
     }
-
 }

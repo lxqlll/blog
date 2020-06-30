@@ -70,15 +70,14 @@ public class AboutController {
 
     /**
      * 根据编号阅读
-     * @param id 编号
      * @return Result 统一返回类型
      */
-    @GetMapping("/reading/{id}")
-    public Result reading(@PathVariable Integer id){
+    @GetMapping("/reading")
+    public Result reading(){
         //判断参数是否为空
-        if (null==id)return new Result(ResultEnum.PARAMS_NULL);
+
         //调用阅读方法
-        About about = aboutService.readingAbout(id);
+        About about = aboutService.readingAbout();
         return new Result(about);
     }
 

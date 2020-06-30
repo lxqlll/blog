@@ -2,6 +2,8 @@ package com.lxq.blog.module.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lxq.blog.enums.ResultEnum;
+import com.lxq.blog.exception.MyException;
 import com.lxq.blog.module.mapper.UserMapper;
 import com.lxq.blog.module.pojo.User;
 import com.lxq.blog.module.service.UserService;
@@ -81,9 +83,7 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public void updateBatchById(List<Integer> userIdList) {
-
         List<User> list = userMapper.getListByIds(userIdList);
-
 //        List<User> userIds = userIdList.stream().map(e -> {
 //            User user = new User();
 //            user.setPassword(Md5Utils.toMD5("123456"));
@@ -95,5 +95,25 @@ public class UserServiceImpl  implements UserService {
             e.setPassword(Md5Utils.toMD5("123456"));
             saveOrUpdate(e);
         });
+    }
+
+    @Override
+    public void insert(User user) throws MyException {
+        //查询用户
+        User u = userMapper.selectById(user.getUsername());
+        //是否存在用户
+        if(null != u){
+            throw new MyException(ResultEnum.ERROR.getCode(),"用户以存在");
+        }
+        //调用新增方法
+        this.saveOrUpdate(user);
+    }
+
+    @Override
+    public User login(String username) {
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq(true,"deleted",0);
+        wrapper.eq(true,"username",username);
+        return userMapper.selectOne(wrapper);
     }
 }

@@ -14,6 +14,25 @@
         <result column="deleted" property="deleted"/>
     </resultMap>
 
+
+    <resultMap id="VoResultMap" type="com.lxq.blog.vo.BlogVo">
+        <id column="blog_id" property="blogId"/>
+        <result column="blog_title" property="blogTitle"/>
+        <result column="blog_image" property="blogImage"/>
+        <result column="blog_content" property="blogContent"/>
+        <result column="blog_goods" property="blogGoods"/>
+        <result column="blog_read" property="blogRead"/>
+        <result column="blog_collection" property="blogCollection"/>
+        <result column="type_name" property="typeName"/>
+        <result column="blog_remark" property="blogRemark"/>
+        <result column="blog_comment" property="blogComment"/>
+        <result column="blog_source" property="blogSource"/>
+        <result column="blog_month" property="blogMonth"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id,
@@ -71,6 +90,17 @@
         </if>
     </select>
 
-
+    <select id="recomRead" resultMap="VoResultMap">
+        select
+        blog_id, blog_title, blog_goods,
+        blog_read, blog_collection, blog_comment,
+        created_time,type_name
+        from bl_blog as b
+        inner join bl_type as t
+        on type_id = blog_type
+        where t.deleted = 0 and b.deleted = 0
+        order by (blog_read + blog_goods) desc
+        limit 5
+    </select>
 
 </mapper>

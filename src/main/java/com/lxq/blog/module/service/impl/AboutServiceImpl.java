@@ -93,9 +93,13 @@ public class AboutServiceImpl implements AboutService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public About readingAbout(Integer id) {
-        //调用查询编号的方法
-        About about = this.getAboutById(id);
+    public About readingAbout() {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        //添加条件 是否被删除
+        queryWrapper.eq("deleted",0);
+        //添加条件 是否启用
+        queryWrapper.eq("enable",1);
+        About about = aboutMapper.selectOne(queryWrapper);
         //修改阅读数
         about.setAboutRead(about.getAboutRead()+1);
         try {

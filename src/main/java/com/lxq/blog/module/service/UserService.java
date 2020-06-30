@@ -1,6 +1,7 @@
 package com.lxq.blog.module.service;
 
 
+import com.lxq.blog.exception.MyException;
 import com.lxq.blog.module.pojo.User;
 import com.lxq.blog.utils.Page;
 
@@ -50,4 +51,15 @@ public interface UserService  {
      * @param userIdList 集合
      */
     void updateBatchById(List<Integer> userIdList);
+
+    /**
+     * 注册
+     * @param user
+     */
+    void insert(User user) throws MyException;
+
+    /**
+     * 登录方法
+     */
+    User login(String username);
 }

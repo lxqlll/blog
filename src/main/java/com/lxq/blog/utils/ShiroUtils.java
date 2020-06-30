@@ -48,7 +48,6 @@ public class ShiroUtils {
         if (principalCollection == null) {
             return null;
         }//获取当前用户
-
         return principalCollection.getPrimaryPrincipal();
     }
 }

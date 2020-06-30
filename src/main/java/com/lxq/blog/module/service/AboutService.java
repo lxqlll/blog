@@ -31,9 +31,8 @@ public interface AboutService {
 
     /**
      * 阅读方法
-     * @param id 编号
      */
-    About readingAbout(Integer id);
+    About readingAbout();
 
     /**
      * 删除方法

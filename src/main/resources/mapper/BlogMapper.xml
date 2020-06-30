@@ -34,6 +34,7 @@
         <result column="blog_month" property="blogMonth"/>
         <result column="created_time" property="createdTime"/>
         <result column="update_time" property="updateTime"/>
+        <result column="blogMonth" property="blog_month"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -82,11 +83,6 @@
         </if>
     </select>
 
-
-
-
-
-
     <select id="recomRead" resultMap="VoResultMap">
         select
         blog_id, blog_title, blog_goods,
@@ -108,5 +104,8 @@
         from bl_blog
         order by created_time desc
     </select>
+
+
+
 
 </mapper>

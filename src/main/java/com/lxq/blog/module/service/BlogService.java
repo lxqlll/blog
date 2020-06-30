@@ -5,6 +5,8 @@ import com.lxq.blog.module.pojo.Blog;
 import com.lxq.blog.utils.Page;
 import com.lxq.blog.vo.BlogVo;
 
+import java.util.List;
+
 /**
  * <p>
  * 博客表服务层接口
@@ -33,7 +35,7 @@ public interface BlogService {
      * @param id 编号
      * @return BlogVo 博客表类型表实体 不等于空查询成功
      */
-    BlogVo readById(String id);
+    Blog readById(String id);
 
     /**
      * 删除
@@ -45,4 +47,15 @@ public interface BlogService {
      * 分页查询
      */
     Page<BlogVo> getByPage(Page<BlogVo> page);
+
+    /**
+     * 推荐阅读
+     * @return
+     */
+    List<BlogVo> recommendReading();
+    /**
+     * 查询时间轴
+     * @return
+     */
+    List<BlogVo> getTimeLine();
 }

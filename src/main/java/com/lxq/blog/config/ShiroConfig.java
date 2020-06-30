@@ -47,17 +47,31 @@ public class ShiroConfig {
         Map<String, String> filterMap = Maps.newLinkedHashMap();
 
         //友情链接
-        filterMap.put("/link/getLink/", "anon");
-        filterMap.put("/link/getLinkById/*", "anon");
+        filterMap.put("/link/getLink", "anon");
         //音乐欣赏
-        filterMap.put("/music/page", "anon");
         filterMap.put("/music/list", "anon");
+        //管理员信息
+        filterMap.put("/admin/getAdmin", "anon");
+        // 帖子分类
+        filterMap.put("/type/getType", "anon");
+        //帖子数
+        filterMap.put("/type/getTypeCount", "anon");
         //关于
-        filterMap.put("/about/*", "anon");
-
-        filterMap.put("/login/getAdmin", "anon");
-
+        filterMap.put("/about/reading", "anon");
+        //推荐阅读
+        filterMap.put("/blog/recommendBlog", "anon");
+        //博客列表
+        filterMap.put("/blog/pageBlog", "anon");
+        //当个博客
+        filterMap.put("/blog/read/**", "anon");
+        //时间
+        filterMap.put("/blog/getTimeLine", "anon");
+        //注册
+        filterMap.put("/*/register", "anon");
+        //登录
         filterMap.put("/*/login", "anon");
+
+
         filterMap.put("/**", "authc");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);

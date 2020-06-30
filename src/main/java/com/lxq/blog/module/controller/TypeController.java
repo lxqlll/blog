@@ -61,6 +61,16 @@ public class TypeController {
     }
 
     /**
+     * 前端显示数量
+     * @return Result 统一返回类型
+     */
+    @GetMapping(value = "/getTypeCount")
+    public Result<Type> getTypeCount(){
+        return new Result(typeService.showAllTypeCout());
+    }
+
+
+    /**
      * 后端显示所有数据
      * @return Result 统一返回类型
      */
@@ -102,6 +112,10 @@ public class TypeController {
         typeService.updateById(type);
         return new Result(ResultEnum.SUCCESS.getCode(),"启用成功");
     }
+
+
+
+
 
     /**
      * 禁用方法

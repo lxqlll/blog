@@ -147,4 +147,14 @@ public class TypeServiceImpl implements TypeService {
         }
         return result;
     }
+
+    @Override
+    public int showAllTypeCout() {
+        //实例化创建QueryWrapper对象
+        QueryWrapper queryWrapper = new QueryWrapper();
+        //添加查询条件
+        queryWrapper.eq("deleted",0);
+        queryWrapper.eq("enable",1);
+        return typeMapper.selectCount(queryWrapper);
+    }
 }

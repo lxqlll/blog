@@ -32,4 +32,16 @@ public interface BlogMapper extends BaseMapper<Blog> {
      * @return Integer 整形
      */
     public Integer getCountByPage(Page<BlogVo> page);
+
+    /**
+     * 推荐阅读
+     * @return
+     */
+    public  List<BlogVo> recomRead();
+
+    /**
+     * 查询时间轴
+     * @return
+     */
+    List<BlogVo> getTimeLine();
 }

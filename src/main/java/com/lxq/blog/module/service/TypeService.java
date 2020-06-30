@@ -1,6 +1,7 @@
 package com.lxq.blog.module.service;
 
 
+import com.lxq.blog.enums.ResultEnum;
 import com.lxq.blog.module.pojo.Type;
 
 import java.util.List;
@@ -75,4 +76,10 @@ public interface TypeService {
      * @return int 整形 返回结果大于1执行成功
      */
     public int updateTypeBlock(Integer id);
+
+    /**
+     * 数量
+     * @return
+     */
+    int showAllTypeCout();
 }

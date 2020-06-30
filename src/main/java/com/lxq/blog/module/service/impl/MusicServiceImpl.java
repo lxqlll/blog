@@ -92,8 +92,10 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public List<Music> showList() {
         QueryWrapper queryWrapper = new QueryWrapper();
+        String [] columnname = {"id", "name", "artist", "url", "cover", "lrc"};
+        queryWrapper.select(columnname);
         queryWrapper.eq("deleted",0);
-        queryWrapper.eq("enable",1);
+        queryWrapper.eq("enabled",1);
         List<Music> musics = musicMapper.selectList(queryWrapper);
         return musics;
     }

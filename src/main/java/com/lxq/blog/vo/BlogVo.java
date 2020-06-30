@@ -87,5 +87,9 @@ public class BlogVo {
      * 类型名称
      */
     private String typeName;
+    /**
+     * 创建时间月份
+     */
+    private String blogMonth;
 
 }
