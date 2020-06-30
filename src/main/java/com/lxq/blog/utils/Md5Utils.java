@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * @version 1.0
- * @author: 杨德石
+ * @author: lxq
  * @date: 2019/3/31 0031 下午 1:49
  */
 public class Md5Utils {
